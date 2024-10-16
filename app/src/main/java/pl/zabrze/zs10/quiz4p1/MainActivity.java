@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView textView;
     private Button buttonNastepne;
     private Button buttonTak;
+    private Button buttonNie;
     private int licznikPytan = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,11 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         licznikPytan++;
                         if(licznikPytan == listaPytan.size()){
+                           int punkciki = podliczPunkty();
+                           textView.setText("Test zakończono zdobyto "+Integer.toString(punkciki)+" punkty");
                             buttonNastepne.setVisibility(View.INVISIBLE);
+                            buttonTak.setVisibility(View.INVISIBLE);
+                            buttonNie.setVisibility(View.INVISIBLE);
                         }
                         else {
                             przygotujWidokPytania(licznikPytan);
@@ -49,7 +54,27 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+        buttonNie = findViewById(R.id.buttonNie);
+        buttonNie.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        zaznaczOdpowiedz(false);
+                    }
+                }
+        );
     }
+    private int podliczPunkty(){
+        int punkty = 0;
+        for (Pytanie pytanie:listaPytan) {
+            if(pytanie.isCzyUdzielonoPoprawnejOdpowiedzi()){
+                punkty++;
+            }
+        }
+        return punkty;
+    }
+
+
     private void zaznaczOdpowiedz(boolean odpowiedz){
         Pytanie pytanie = listaPytan.get(licznikPytan);
         if(pytanie.isOdpPoprawna() == odpowiedz){
