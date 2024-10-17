@@ -9,6 +9,12 @@
     android:background="#629A64"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/zespolu2" />
+
     <TextView
         android:id="@+id/textViewTrescPytania"
         android:layout_width="wrap_content"

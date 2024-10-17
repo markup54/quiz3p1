@@ -2,6 +2,7 @@ package pl.zabrze.zs10.quiz4p1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonNastepne;
     private Button buttonTak;
     private Button buttonNie;
+    private Button buttonPodpowiedz;
     private int licznikPytan = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,17 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         zaznaczOdpowiedz(false);
+                    }
+                }
+        );
+        buttonPodpowiedz = findViewById(R.id.button3);
+        buttonPodpowiedz.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(MainActivity.this,PodpowiedzActivity.class);
+                        intent.putExtra("PODPOWIEDZ",listaPytan.get(licznikPytan).getPodpowiedz());
+                        startActivity(intent);
                     }
                 }
         );
